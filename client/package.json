@@ -1,6 +1,7 @@
 {
   "name": "vrwiz-client",
   "version": "0.1.0",
+  "description": "Collaborative multiplayer VR client and server framework for data visualization powered by A-Frame and Socket.IO",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -9,5 +10,26 @@
   "devDependencies": {
     "typescript": "^4.5.4",
     "vite": "^2.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS1951T-AFrame/VRWiz.git"
+  },
+  "keywords": [
+    "aframe",
+    "vr",
+    "multiplayer",
+    "visualization",
+    "multiplayer"
+  ],
+  "author": "CS1951T Students",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/CS1951T-AFrame/VRWiz/issues"
+  },
+  "homepage": "https://github.com/CS1951T-AFrame/VRWiz#readme",
+  "dependencies": {
+    "aframe": "^1.3.0",
+    "socket.io-client": "^4.4.1"
   }
 }

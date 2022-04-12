@@ -2,10 +2,10 @@
   "name": "vrwiz-server",
   "version": "0.1.0",
   "description": "Collaborative multiplayer VR client and server framework for data visualization powered by A-Frame and Socket.IO",
-  "main": "src/",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon src",
-    "start": "node dist",
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
     "build": "npm run clean && tsc",
     "clean": "rm -rf dist"
   },
@@ -26,6 +26,10 @@
     "url": "https://github.com/CS1951T-AFrame/VRWiz/issues"
   },
   "homepage": "https://github.com/CS1951T-AFrame/VRWiz#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "socket.io": "^4.4.1"
+  },
   "devDependencies": {
     "nodemon": "^2.0.15",
     "ts-node": "^10.7.0",
