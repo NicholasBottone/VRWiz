@@ -1,0 +1,34 @@
+{
+  "name": "vrwiz-server",
+  "version": "0.1.0",
+  "description": "Collaborative multiplayer VR client and server framework for data visualization powered by A-Frame and Socket.IO",
+  "main": "src/",
+  "scripts": {
+    "dev": "nodemon src",
+    "start": "node dist",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS1951T-AFrame/VRWiz.git"
+  },
+  "keywords": [
+    "aframe",
+    "vr",
+    "multiplayer",
+    "visualization",
+    "multiplayer"
+  ],
+  "author": "CS1951T Students",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/CS1951T-AFrame/VRWiz/issues"
+  },
+  "homepage": "https://github.com/CS1951T-AFrame/VRWiz#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}
