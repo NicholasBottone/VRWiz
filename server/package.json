@@ -7,7 +7,8 @@
     "dev": "nodemon src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "cert": "rm -rf .cert && mkdir .cert && mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem 'localhost'"
   },
   "repository": {
     "type": "git",

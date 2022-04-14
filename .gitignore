@@ -117,4 +117,4 @@ dist-ssr
 *.sw?
 
 # Certificate and key files
-secrets/
+.cert/

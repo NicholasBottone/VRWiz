@@ -6,11 +6,7 @@ The VRWiz Backend Server is a WebSocket server that runs on Node's built-in HTTP
 
 Since this server runs on HTTPS, you will need to set up an SSL certificate and key to use. For production, you should consider using Let's Encrypt and a tool like [acme.sh](https://acme.sh/) or [certbot](https://certbot.eff.org/).
 
-For development, you can use the following command to generate a self-signed certificate:
-
-```
-openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.crt -sha256 -days 365 -nodes
-```
+For development, you should install `mkcert` (install with `brew install mkcert`) and then you can use the following command to generate a self-signed certificate: `npm run cert`.
 
 ## Environment Variables
 
@@ -35,3 +31,7 @@ Builds the backend server for production, compiling all of the TS files into JS 
 ### `npm run clean`
 
 Cleans the `dist` directory.
+
+### `npm run cert`
+
+Generates a self-signed certificate for development. (You must have `mkcert` installed.)

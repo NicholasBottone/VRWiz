@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cert": "rm -rf .cert && mkdir .cert && mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem 'localhost'"
   },
   "devDependencies": {
     "@types/node": "^17.0.24",
     "typescript": "^4.5.4",
-    "vite": "^2.9.0"
+    "vite": "^2.9.0",
+    "vite-plugin-mkcert": "^1.6.0"
   },
   "repository": {
     "type": "git",
