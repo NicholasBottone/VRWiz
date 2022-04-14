@@ -28,10 +28,10 @@ export function createControllers(userObj: User, clientId: string) {
   setControllerProps(left);
   setControllerProps(right);
 
-  left.setAttribute("id", getLeftControllerId(clientId));
+  left.setAttribute("id", getLeftControllerId(userObj.id));
   left.setAttribute("color", CONE_LEFT_COLOR);
 
-  right.setAttribute("id", getRightControllerId(clientId));
+  right.setAttribute("id", getRightControllerId(userObj.id));
   right.setAttribute("color", CONE_RIGHT_COLOR);
 
   left.setAttribute("position", userObj.left.pos);
@@ -45,8 +45,8 @@ export function createControllers(userObj: User, clientId: string) {
  */
 export function updateControllers(userObj: User, clientId: string) {
   try {
-    const left = getLeftControllerId(clientId);
-    const right = getRightControllerId(clientId);
+    const left = getLeftControllerId(userObj.id);
+    const right = getRightControllerId(userObj.id);
 
     const leftCon = document.getElementById(left)!;
     const rightCon = document.getElementById(right)!;
@@ -66,6 +66,7 @@ export function updateControllers(userObj: User, clientId: string) {
  * suffix is either left or right
  */
 function getControllerId(userId: string, suffix: string) {
+  console.log("user id", userId);
   const sliced = userId.slice(0, 5);
   // appends a as prefix since ids must start with letters, and socket ids dont always do
   return `a${sliced}-${suffix}`;
@@ -90,16 +91,16 @@ export function removeControllers(userId: string) {
 export function createMyUserObj(id: string) {
   if (!id) throw new Error("no established connection to socket!");
 
-  const leftPosString = getPositionSting(
+  const leftPosString = getPositionString(
     document.getElementById("left-con")!.getAttribute("position")!
   );
-  const leftRotString = getPositionSting(
+  const leftRotString = getPositionString(
     document.getElementById("left-con")!.getAttribute("rotation")!
   );
-  const rightPosString = getPositionSting(
+  const rightPosString = getPositionString(
     document.getElementById("right-con")!.getAttribute("position")!
   );
-  const rightRotString = getPositionSting(
+  const rightRotString = getPositionString(
     document.getElementById("right-con")!.getAttribute("rotation")!
   );
 
@@ -113,7 +114,8 @@ export function createMyUserObj(id: string) {
 /**
  * Creates a coordinate string from an AFrame position object
  */
-function getPositionSting(posStr: string) {
-  const obj = JSON.parse(posStr);
+function getPositionString(posStr: any) {
+  console.log("pos string", posStr);
+  const obj = posStr;
   return `${obj.x} ${obj.y} ${obj.z}`;
 }
