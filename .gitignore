@@ -115,3 +115,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Certificate and key files
+secrets/
