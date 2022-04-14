@@ -28,6 +28,7 @@
   "homepage": "https://github.com/CS1951T-AFrame/VRWiz#readme",
   "dependencies": {
     "dotenv": "^16.0.0",
+    "log4js": "^6.4.4",
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
