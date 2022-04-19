@@ -1,0 +1,31 @@
+name: 🧪 Build on Pull Request
+
+on: pull_request
+
+jobs:
+  build:
+    name: Build and Test
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 🔨 Set up Node 14.19.1
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.19.1
+
+      - name: 🛠 Compile Backend
+        run: |
+          cd server
+          npm ci
+          npm run build
+          cd ..
+      - name: ⛏ Build Frontend
+        run: |
+          cd client
+          npm ci
+          npm run build
+          cd ..

@@ -1,4 +1,5 @@
 [![Repo License](https://img.shields.io/badge/license-GPL--3.0-orange?style=plastic)](./LICENSE)
+[![Website](https://img.shields.io/website?style=plastic&url=https%3A%2F%2Fvrwiz.pages.dev%2F)](https://vrwiz.pages.dev/)
 
 # VRWiz
 
