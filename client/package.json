@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "cert": "rm -rf .cert && mkdir .cert && mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem 'localhost'"
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "@types/node": "^17.0.24",

@@ -4,7 +4,7 @@ import User from "./types/User";
  * takes in a user object and creates two controllers (left and right)
  * with id of the user's socket id + a left/right extension
  */
-export function createControllers(userObj: User, clientId: string) {
+export function createControllers(userObj: User, _clientId: string) {
   const CONE_HEIGHT = 0.3;
   const CONE_RADIUS_BOTTOM = 0.1;
   const CONE_RADIUS_TOP = 0.01;
@@ -114,8 +114,7 @@ export function createMyUserObj(id: string) {
 /**
  * Creates a coordinate string from an AFrame position object
  */
-function getPositionString(posStr: any) {
-  console.log("pos string", posStr);
-  const obj = posStr;
-  return `${obj.x} ${obj.y} ${obj.z}`;
+function getPositionString(coords: any) {
+  console.log(coords);
+  return `${coords.x} ${coords.y} ${coords.z}`;
 }
