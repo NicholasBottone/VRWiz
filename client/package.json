@@ -10,9 +10,11 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@belivvr/aframe-react": "^0.4.1",
+    "@types/aframe": "^1.2.0",
+    "aframe": "github:aframevr/aframe#018e1236bc71cc9ffa42cd34aeedd03a23a8cd2e",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "aframe": "^1.3.0",
     "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
