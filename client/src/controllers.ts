@@ -66,7 +66,6 @@ export function updateControllers(userObj: User, clientId: string) {
  * suffix is either left or right
  */
 function getControllerId(userId: string, suffix: string) {
-  console.log("user id", userId);
   const sliced = userId.slice(0, 5);
   // appends a as prefix since ids must start with letters, and socket ids dont always do
   return `a${sliced}-${suffix}`;
@@ -115,6 +114,5 @@ export function createMyUserObj(id: string) {
  * Creates a coordinate string from an AFrame position object
  */
 function getPositionString(coords: any) {
-  console.log(coords);
   return `${coords.x} ${coords.y} ${coords.z}`;
 }
