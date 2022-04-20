@@ -29,23 +29,13 @@ jobs:
           mkdir -p deploy/server/dist
           cp -r server/dist deploy/server
           cp server/* deploy/server || :
-      - name: ⛏ Build Frontend
-        run: |
-          cd client
-          npm ci
-          npm run build
-          cd ..
-          mkdir -p deploy/public
-          cp -r client/build/* deploy/public
-        env:
-          SERVER_URL: "https://node.rws-hosting.com:4443"
 
-      # - name: ☁ SFTP Deploy
-      #   uses: easingthemes/ssh-deploy@v2
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-      #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
-      #     REMOTE_PORT: 21098
-      #     TARGET: ${{ secrets.REMOTE_TARGET }}
-      #     SOURCE: ${{ secrets.SOURCE_DIR }}
+      - name: ☁ SFTP Deploy
+        uses: easingthemes/ssh-deploy@v2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: 2222
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          SOURCE: ${{ secrets.SOURCE_DIR }}
