@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import { createMyUserObj } from "./controllers";
+import { createMyUserObj } from "../../client/src/controllers";
 import PlayerList from "./PlayerList";
 import User from "./types/User";
 

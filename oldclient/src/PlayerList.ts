@@ -2,7 +2,7 @@ import {
   createControllers,
   updateControllers,
   removeControllers,
-} from "./controllers";
+} from "../../client/src/controllers";
 import User from "./types/User";
 
 /**

@@ -1,4 +1,6 @@
-import User from "./types/User";
+import { Entity } from "@belivvr/aframe-react/";
+import React, { FunctionComponent } from "react";
+import User from "../../oldclient/src/types/User";
 
 /*
  * takes in a user object and creates two controllers (left and right)
@@ -87,20 +89,19 @@ export function removeControllers(userId: string) {
 /**
  * takes in the current user's socket id, gets current user's pos data
  */
-export function createMyUserObj(id: string) {
+export function createMyUserObj(id: string, leftController: any, rightController: any) {
   if (!id) throw new Error("no established connection to socket!");
-
   const leftPosString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("position")!
+    leftController.getAttribute("position")
   );
   const leftRotString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("rotation")!
+    leftController.getAttribute("rotation")
   );
   const rightPosString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("position")!
+    rightController.getAttribute("position")
   );
   const rightRotString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("rotation")!
+    leftController.getAttribute("rotation")
   );
 
   return {
