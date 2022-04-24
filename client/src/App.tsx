@@ -8,66 +8,71 @@ import User from "./types/User";
 import { MyLeftController } from "./components/MyLeftController";
 import { MyRightController } from "./components/MyRightController";
 
+interface UserObj {
+  [key: string]: User;
+}
+// const myLeftRef = useRef<FunctionComponent>(null);
+// const myRightRef = useRef<FunctionComponent>(null);
+// const leftRef = useRef<FunctionComponent>(null);
+// const rightRef = useRef<FunctionComponent>(null);
+
+const SERVER_URL = import.meta.env.SERVER_URL || "https://localhost:8000";
+const INTERVAL = 500;
+
+// const socket = io(SERVER_URL);
+
+
+
 function App() {
-  interface UserObj {
-    [key: string]: User;
-  }
   const [playerList, setPlayerList] = React.useState<UserObj>({});
-  const myLeftRef = useRef<FunctionComponent>(null);
-  const myRightRef = useRef<FunctionComponent>(null);
-  const leftRef = useRef<FunctionComponent>(null);
-  const rightRef = useRef<FunctionComponent>(null);
-
+  const [socket, setSocket] = React.useState<any>(io(SERVER_URL));
+  
   useEffect(() => {
-    const SERVER_URL = import.meta.env.SERVER_URL || "https://localhost:8000";
-    const INTERVAL = 50;
-
-    const socket = io(SERVER_URL);
-
     socket.on("connect", () => {
       console.log("you connected with id: ", socket.id);
-      const myId = socket.id
-
-      // constantly update send server new pos data
+      const myId = socket.id;
+    });
+    
+    // constantly update send server new pos data
       window.setInterval(() => {
-        const myLeftController: any =
-          document.getElementById("my-left-controller");
+        const myLeftController: any = document.getElementById("my-left-controller");
         const myRightController: any =
-          document.getElementById("my-left-controller")!;
-          // console.log("eequal", myId == socket.id)
-          console.log("my id", socket.id)
+          document.getElementById("my-right-controller")!;
+        // console.log("eequal", myId == socket.id)
+        console.log("my id", socket.id);
         socket.emit(
           "update",
-          createMyUserObj(myId, myLeftController, myRightController),
-          myId
+          createMyUserObj(socket.id, myLeftController, myRightController),
+          socket.id
         );
       }, INTERVAL);
-    });
 
-    // create player obj when a new client joins
-    socket.on("join", (socketId: string) => {
-      const userObj: User = {
-        id: socketId,
-        left: { pos: "0 0 0", rot: "0 0 0" },
-        right: { pos: "0 0 0", rot: "0 0 0" },
-      };
 
-      setPlayerList({ ...playerList, [socketId]: userObj });
-    });
+      // create player obj when a new client joins
+  socket.on("join", (socketId: string) => {
+    const userObj: User = {
+      id: socketId,
+      left: { pos: "0 0 0", rot: "0 0 0" },
+      right: { pos: "0 0 0", rot: "0 0 0" },
+    };
+    console.log(`user ${socketId} joined`);
+    setPlayerList({ ...playerList, [socketId]: userObj });
+  });
 
-    socket.on("update", (userObj: User, clientId: string) => {
-      console.log(userObj.left.pos);
-      console.log(userObj.id);
-      console.log("different", userObj.id, clientId);
-      // console.log("not equal", clientId == userObj.id);
-      setPlayerList({ ...playerList, [userObj.id]: userObj });
-    });
+  socket.on("update", (userObj: User, clientId: string) => {
+    // console.log(userObj.left.pos);
+    // console.log(userObj.id);
+    // console.log("different", userObj.id, clientId);
+    // console.log("not equal", clientId == userObj.id);
+    setPlayerList({ ...playerList, [userObj.id]: userObj });
+  });
 
-    socket.on("leave", (clientId: string) => {
-      const { [clientId]: someObject, ...newPlayerList } = playerList;
-      setPlayerList(newPlayerList);
-    });
-  }, []);
+  socket.on("leave", (clientId: string) => {
+    const { [clientId]: someObject, ...newPlayerList } = playerList;
+    setPlayerList(newPlayerList);
+  });
+  }, [])
+  
 
   return (
     <Scene>

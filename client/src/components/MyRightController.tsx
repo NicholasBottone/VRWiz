@@ -7,7 +7,7 @@ export const MyRightController = React.forwardRef((props, ref) => {
     hand: "right",
   };
 
-  return <Entity id="my-ref-controller" handControls={rightProps}></Entity>;
+  return <Entity id="my-right-controller" handControls={rightProps}></Entity>;
 });
 
 export default MyRightController;
