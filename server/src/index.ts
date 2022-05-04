@@ -3,6 +3,7 @@ import log4js from "log4js";
 import fs from "fs";
 import https from "https";
 import { Server } from "socket.io";
+import express from "express";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -19,12 +20,15 @@ log4js.configure({
 });
 const logger = log4js.getLogger("server");
 
+// Create an express server
+const exp = express();
+
 // Create an HTTPS service
 const httpsOptions = {
   key: fs.readFileSync(process.env.KEY_PATH!),
   cert: fs.readFileSync(process.env.CERT_PATH!),
 };
-const app = https.createServer(httpsOptions);
+const app = https.createServer(httpsOptions, exp);
 logger.info("HTTPS server created");
 
 // Create a socket.io service
@@ -54,6 +58,11 @@ io.on("connection", (socket) => {
     logger.trace(`Client updated: ${socket.id}`);
     socket.broadcast.emit("update", update);
   });
+});
+
+// Setup a hello world route on the express server
+exp.get("/", (_req, res) => {
+  res.send("Hello world!");
 });
 
 // Start the server
