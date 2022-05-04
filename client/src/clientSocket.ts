@@ -3,7 +3,7 @@ import { createMyUserObj } from "./controllers";
 import PlayerList from "./PlayerList";
 import User from "./types/User";
 
-const SERVER_URL = "https://node.rws-hosting.com:4443"; // import.meta.env.BACKEND_URL || "https://localhost:8000";
+const SERVER_URL = import.meta.env.VITE_BACKEND_URL || "https://localhost:8000";
 const INTERVAL = 50;
 
 var playerList = new PlayerList();
