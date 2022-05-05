@@ -24,7 +24,7 @@
         height="25"
         width="30"
         rotation="-90 0 0"
-        position="0 -3 20"
+        position="0 -1 20"
         src="#pop-growth"
       ></a-plane>
 
@@ -52,6 +52,9 @@
         ></a-entity>
         <a-entity id="left-con" oculus-touch-controls="hand: left"></a-entity>
         <a-entity id="right-con" oculus-touch-controls="hand: right"></a-entity>
+        <a-entity
+          raycaster="showLine: true; far: 100; lineColor: red; lineOpacity: 0.5"
+        ></a-entity>
       </a-entity>
     </a-scene>
     <script type="module" src="/src/main.ts"></script>
