@@ -5,7 +5,7 @@ import User from "./types/User";
  * takes in a user object and creates two controllers (left and right)
  * with id of the user's socket id + a left/right extension
  */
-export function createControllers(userObj: User, _clientId: string) {
+export function createAvatar(userObj: User, _clientId: string) {
   const CONE_HEIGHT = 0.3;
   const CONE_RADIUS_BOTTOM = 0.1;
   const CONE_RADIUS_TOP = 0.01;
@@ -14,10 +14,24 @@ export function createControllers(userObj: User, _clientId: string) {
 
   const left = document.createElement("a-cone");
   const right = document.createElement("a-cone");
+
+  const head = document.createElement("a-entity");
+  const face = document.createElement("a-sphere");
+  const leftEye = document.createElement("a-sphere");
+  const rightEye = document.createElement("a-sphere");
+  const leftPupil = document.createElement("a-sphere");
+  const rightPupil = document.createElement("a-sphere");
+
   const scene = document.querySelector("a-scene")!;
 
   scene.appendChild(left);
   scene.appendChild(right);
+  scene.appendChild(head);
+  head.appendChild(face);
+  head.appendChild(leftEye);
+  head.appendChild(rightEye);
+  head.appendChild(leftPupil);
+  head.appendChild(rightPupil);
 
   function setControllerProps(controller: HTMLElement) {
     controller.setAttribute(
@@ -39,12 +53,41 @@ export function createControllers(userObj: User, _clientId: string) {
   left.setAttribute("rotation", userObj.left.rot);
   right.setAttribute("position", userObj.right.pos);
   right.setAttribute("rotation", userObj.right.rot);
+
+  head.setAttribute("id", `a${userObj.id}-head`);
+  head.setAttribute("position", userObj.head.pos);
+  head.setAttribute("rotation", userObj.head.rot);
+
+  face.setAttribute("id", `a${userObj.id}-face`);
+  face.setAttribute("position", "0 0 0");
+  face.setAttribute("radius", "0.5");
+  face.setAttribute("color", userObj.color);
+
+  leftEye.setAttribute("id", `a${userObj.id}-left-eye`);
+  leftEye.setAttribute("position", "0.1 0.1 0");
+  leftEye.setAttribute("radius", "0.1");
+  leftEye.setAttribute("color", "white");
+
+  rightEye.setAttribute("id", `a${userObj.id}-right-eye`);
+  rightEye.setAttribute("position", "-0.1 0.1 0");
+  rightEye.setAttribute("radius", "0.1");
+  rightEye.setAttribute("color", "white");
+
+  leftPupil.setAttribute("id", `a${userObj.id}-left-pupil`);
+  leftPupil.setAttribute("position", "0.1 0.1 0");
+  leftPupil.setAttribute("radius", "0.05");
+  leftPupil.setAttribute("color", "black");
+
+  rightPupil.setAttribute("id", `a${userObj.id}-right-pupil`);
+  rightPupil.setAttribute("position", "-0.1 0.1 0");
+  rightPupil.setAttribute("radius", "0.05");
+  rightPupil.setAttribute("color", "black");
 }
 
 /**
  * takes in a user object and id and sets the position of that user's controllers accordingly
  */
-export function updateControllers(userObj: User, clientId: string) {
+export function updateAvatar(userObj: User, clientId: string) {
   try {
     const left = getLeftControllerId(userObj.id);
     const right = getRightControllerId(userObj.id);
@@ -56,9 +99,13 @@ export function updateControllers(userObj: User, clientId: string) {
     leftCon.setAttribute("rotation", userObj.left.rot);
     rightCon.setAttribute("position", userObj.right.pos);
     rightCon.setAttribute("rotation", userObj.right.rot);
+
+    const head = document.getElementById(`a${userObj.id}-head`)!;
+    head.setAttribute("position", userObj.head.pos);
+    head.setAttribute("rotation", userObj.head.rot);
   } catch (error) {
     // if controllers do not exist yet, then create them
-    createControllers(userObj, clientId);
+    createAvatar(userObj, clientId);
   }
 }
 
@@ -80,9 +127,10 @@ function getRightControllerId(userId: string) {
   return getControllerId(userId, "right");
 }
 
-export function removeControllers(userId: string) {
+export function removeAvatar(userId: string) {
   document.getElementById(getLeftControllerId(userId))!.remove();
   document.getElementById(getRightControllerId(userId))!.remove();
+  document.getElementById(`a${userId}-head`)!.remove();
 }
 
 /**
@@ -103,6 +151,12 @@ export function createMyUserObj(id: string, username: string): User {
   const rightRotString = getPositionString(
     document.getElementById("right-con")!.getAttribute("rotation")!
   );
+  const headPosString = getPositionString(
+    document.getElementById("camera")!.getAttribute("position")!
+  );
+  const headRotString = getPositionString(
+    document.getElementById("rig")!.getAttribute("rotation")!
+  );
 
   const color = stringToColor(id);
 
@@ -112,6 +166,7 @@ export function createMyUserObj(id: string, username: string): User {
     color,
     left: { pos: leftPosString, rot: leftRotString },
     right: { pos: rightPosString, rot: rightRotString },
+    head: { pos: headPosString, rot: headRotString },
   };
 }
 

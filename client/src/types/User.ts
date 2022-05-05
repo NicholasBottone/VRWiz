@@ -10,4 +10,8 @@ export default interface User {
     pos: string;
     rot: string;
   };
+  head: {
+    pos: string;
+    rot: string;
+  };
 }

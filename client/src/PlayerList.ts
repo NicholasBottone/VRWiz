@@ -1,8 +1,4 @@
-import {
-  createControllers,
-  updateControllers,
-  removeControllers,
-} from "./controllers";
+import { createAvatar, updateAvatar, removeAvatar } from "./Avatar";
 import stringToColor from "./stringToColor";
 import User from "./types/User";
 
@@ -31,9 +27,10 @@ export default class PlayerList {
       color,
       left: { pos: "0 0 0", rot: "0 0 0" },
       right: { pos: "0 0 0", rot: "0 0 0" },
+      head: { pos: "0 1.6 0", rot: "0 0 0" },
     };
     this.clientsObj[id] = userObj;
-    createControllers(userObj, id);
+    createAvatar(userObj, id);
   }
 
   getPlayerObjById(id: string) {
@@ -45,7 +42,7 @@ export default class PlayerList {
    * and removes controller representations.
    */
   removePlayer(clientId: string) {
-    removeControllers(clientId);
+    removeAvatar(clientId);
     delete this.clientsObj[clientId];
   }
 
@@ -55,6 +52,6 @@ export default class PlayerList {
    */
   updatePos(receivedObj: User, clientId: string) {
     this.clientsObj[clientId] = receivedObj; // updates player obj in player list
-    updateControllers(receivedObj, clientId); // updates controller representations
+    updateAvatar(receivedObj, clientId); // updates controller representations
   }
 }
