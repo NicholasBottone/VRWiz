@@ -1,3 +1,4 @@
+import stringToColor from "./stringToColor";
 import User from "./types/User";
 
 /*
@@ -87,7 +88,7 @@ export function removeControllers(userId: string) {
 /**
  * takes in the current user's socket id, gets current user's pos data
  */
-export function createMyUserObj(id: string) {
+export function createMyUserObj(id: string, username: string): User {
   if (!id) throw new Error("no established connection to socket!");
 
   const leftPosString = getPositionString(
@@ -103,8 +104,12 @@ export function createMyUserObj(id: string) {
     document.getElementById("right-con")!.getAttribute("rotation")!
   );
 
+  const color = stringToColor(id);
+
   return {
     id,
+    username,
+    color,
     left: { pos: leftPosString, rot: leftRotString },
     right: { pos: rightPosString, rot: rightRotString },
   };

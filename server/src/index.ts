@@ -44,8 +44,11 @@ logger.info("Socket.io server created");
 io.on("connection", (socket) => {
   logger.debug(`Client connected: ${socket.id}`);
 
-  // When a user connects, broadcast the join event to all other users
-  socket.broadcast.emit("join", socket.id);
+  // When a user registers, broadcast the join event to all other users
+  socket.on("register", (username) => {
+    logger.debug(`User ${socket.id} registered as ${username}`);
+    socket.broadcast.emit("join", socket.id, username);
+  });
 
   // When a user disconnects, broadcast the leave event to all other users
   socket.on("disconnect", () => {

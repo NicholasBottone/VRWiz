@@ -3,6 +3,7 @@ import {
   updateControllers,
   removeControllers,
 } from "./controllers";
+import stringToColor from "./stringToColor";
 import User from "./types/User";
 
 /**
@@ -16,12 +17,18 @@ export default class PlayerList {
   }
 
   /**
-   * takes in an id and creates a new player object with their id, and default pos and rot for left and right controlers
+   * takes in an id and creates a new player object with their id, and default pos and rot for left and right controllers
    */
-  createNewPlayer(id: string) {
-    console.log(`user ${id} joined`);
+  createNewPlayer(id: string, username: string) {
+    console.log(`user ${id} (username: ${username}) joined`);
+
+    // Generate user color based on socket id
+    const color = stringToColor(id);
+
     const userObj: User = {
       id,
+      username,
+      color,
       left: { pos: "0 0 0", rot: "0 0 0" },
       right: { pos: "0 0 0", rot: "0 0 0" },
     };
