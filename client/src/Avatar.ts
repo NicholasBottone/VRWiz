@@ -184,7 +184,7 @@ export function createMyUserObj(id: string, username: string): User {
     )
   );
 
-  const color = stringToColor(id);
+  const color = stringToColor(username);
 
   return {
     id,

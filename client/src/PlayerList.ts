@@ -19,7 +19,7 @@ export default class PlayerList {
     console.log(`user ${id} (username: ${username}) joined`);
 
     // Generate user color based on socket id
-    const color = stringToColor(id);
+    const color = stringToColor(username);
 
     const userObj: User = {
       id,
