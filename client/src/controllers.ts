@@ -9,8 +9,8 @@ export function createControllers(userObj: User, _clientId: string) {
   const CONE_HEIGHT = 0.3;
   const CONE_RADIUS_BOTTOM = 0.1;
   const CONE_RADIUS_TOP = 0.01;
-  const CONE_LEFT_COLOR = "#FFC65D";
-  const CONE_RIGHT_COLOR = "#7BC8A4";
+  const CONE_LEFT_COLOR = userObj.color;
+  const CONE_RIGHT_COLOR = userObj.color;
 
   const left = document.createElement("a-cone");
   const right = document.createElement("a-cone");
