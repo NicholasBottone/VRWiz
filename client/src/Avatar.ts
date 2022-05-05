@@ -57,8 +57,6 @@ export function createAvatar(userObj: User, _clientId: string) {
   head.setAttribute("id", `a${userObj.id}-head`);
   head.setAttribute("position", userObj.head.pos);
   head.setAttribute("rotation", userObj.head.rot);
-
-  head.setAttribute("id", `a${userObj.id}-face`);
   head.setAttribute("scale", "0.45 0.5 0.37");
   head.setAttribute("color", userObj.color);
 
@@ -111,7 +109,7 @@ export function updateAvatar(userObj: User, clientId: string) {
     head.setAttribute("position", userObj.head.pos);
     head.setAttribute("rotation", userObj.head.rot);
   } catch (error) {
-    // if controllers do not exist yet, then create them
+    // if avatar does not exist yet, then create it
     createAvatar(userObj, clientId);
   }
 }
