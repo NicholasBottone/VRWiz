@@ -14,7 +14,7 @@ socket.on("connect", () => {
   console.log("you connected with id: ", socket.id);
 
   // Prompt for username
-  const username = prompt("Enter your username") || "Player";
+  const username = prompt("Enter your username") || socket.id;
 
   // Register user
   socket.emit("register", username);
