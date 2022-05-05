@@ -148,28 +148,16 @@ export function createMyUserObj(id: string, username: string): User {
   const rigRotation = document.getElementById("rig")!.getAttribute("rotation");
 
   const leftPosString = getPositionString(
-    getAbsolutePosition(
-      rigPosition,
-      document.getElementById("left-con")!.getAttribute("position")!
-    )
+    document.getElementById("left-con")!.getAttribute("position")!
   );
   const leftRotString = getPositionString(
-    getAbsolutePosition(
-      rigRotation,
-      document.getElementById("left-con")!.getAttribute("rotation")!
-    )
+    document.getElementById("left-con")!.getAttribute("rotation")!
   );
   const rightPosString = getPositionString(
-    getAbsolutePosition(
-      rigPosition,
-      document.getElementById("right-con")!.getAttribute("position")!
-    )
+    document.getElementById("right-con")!.getAttribute("position")!
   );
   const rightRotString = getPositionString(
-    getAbsolutePosition(
-      rigRotation,
-      document.getElementById("right-con")!.getAttribute("rotation")!
-    )
+    document.getElementById("right-con")!.getAttribute("rotation")!
   );
   const headPosString = getPositionString(
     getAbsolutePosition(
@@ -206,14 +194,13 @@ function getPositionString(coords: any) {
 /**
  * Takes in the AFrame position of the rig and the relative position of sub component, and returns the absolute position of the sub component
  */
-function getAbsolutePosition(_rigPos: any, subPos: any) {
-  return subPos;
-  // const rig = { x: rigPos.x, y: rigPos.y, z: rigPos.z };
-  // const sub = { x: subPos.x, y: subPos.y, z: subPos.z };
+function getAbsolutePosition(rigPos: any, subPos: any) {
+  const rig = { x: rigPos.x, y: rigPos.y, z: rigPos.z };
+  const sub = { x: subPos.x, y: subPos.y, z: subPos.z };
 
-  // return {
-  //   x: rig.x + sub.x,
-  //   y: rig.y + sub.y,
-  //   z: rig.z + sub.z,
-  // };
+  return {
+    x: rig.x + sub.x,
+    y: rig.y + sub.y,
+    z: rig.z + sub.z,
+  };
 }
