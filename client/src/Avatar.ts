@@ -160,7 +160,7 @@ export function createMyUserObj(id: string, username: string): User {
     document.getElementById("camera")!.getAttribute("position")!
   );
   const headRotString = getPositionString(
-    document.getElementById("rig")!.getAttribute("rotation")!
+    document.getElementById("camera")!.getAttribute("rotation")!
   );
 
   const color = stringToColor(id);

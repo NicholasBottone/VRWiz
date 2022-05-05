@@ -9,18 +9,8 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
-    <a-scene id="first">
-      <img
-        id="grid"
-        src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png"
-        crossorigin="anonymous"
-        alt="floor grid"
-      />
-      <a-sky id="sky" src="http://i.imgur.com/WqlqEkq.jpg"></a-sky>
-
+    <a-scene id="first" background="color: blue">
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-entity hand-controls="left"></a-entity>
-      <a-entity hand-controls="right"></a-entity>
       <a-cylinder
         position="1 0.75 -3"
         radius="0.5"
@@ -34,18 +24,17 @@
         height="4"
         color="#7BC8A4"
       ></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
 
-      <a-entity id="rig" movement-controls rotation="0 0 0">
+      <a-entity id="rig" movement-controls>
         <a-entity
           id="camera"
           camera
           position="0 1.6 0"
           look-controls="pointerLockEnabled: true"
         ></a-entity>
+        <a-entity id="left-con" oculus-touch-controls="hand: left"></a-entity>
+        <a-entity id="right-con" oculus-touch-controls="hand: right"></a-entity>
       </a-entity>
-      <a-entity id="left-con" oculus-touch-controls="hand: left"></a-entity>
-      <a-entity id="right-con" oculus-touch-controls="hand: right"></a-entity>
     </a-scene>
     <script type="module" src="/src/main.ts"></script>
   </body>
