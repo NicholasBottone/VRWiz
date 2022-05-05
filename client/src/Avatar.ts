@@ -12,9 +12,6 @@ export function createAvatar(userObj: User, _clientId: string) {
   const CONE_LEFT_COLOR = userObj.color;
   const CONE_RIGHT_COLOR = userObj.color;
 
-  const left = document.createElement("a-cone");
-  const right = document.createElement("a-cone");
-
   const head = document.createElement("a-sphere");
   const leftEye = document.createElement("a-sphere");
   const rightEye = document.createElement("a-sphere");
@@ -22,11 +19,14 @@ export function createAvatar(userObj: User, _clientId: string) {
   const rightPupil = document.createElement("a-sphere");
   const nametag = document.createElement("a-entity");
 
+  const leftHand = document.createElement("a-cone");
+  const rightHand = document.createElement("a-cone");
+
   const scene = document.querySelector("a-scene")!;
 
-  scene.appendChild(left);
-  scene.appendChild(right);
   scene.appendChild(head);
+  head.appendChild(leftHand);
+  head.appendChild(rightHand);
   head.appendChild(leftEye);
   head.appendChild(rightEye);
   leftEye.appendChild(leftPupil);
@@ -40,19 +40,19 @@ export function createAvatar(userObj: User, _clientId: string) {
     );
   }
 
-  setControllerProps(left);
-  setControllerProps(right);
+  setControllerProps(leftHand);
+  setControllerProps(rightHand);
 
-  left.setAttribute("id", getLeftControllerId(userObj.id));
-  left.setAttribute("color", CONE_LEFT_COLOR);
+  leftHand.setAttribute("id", getLeftControllerId(userObj.id));
+  leftHand.setAttribute("color", CONE_LEFT_COLOR);
 
-  right.setAttribute("id", getRightControllerId(userObj.id));
-  right.setAttribute("color", CONE_RIGHT_COLOR);
+  rightHand.setAttribute("id", getRightControllerId(userObj.id));
+  rightHand.setAttribute("color", CONE_RIGHT_COLOR);
 
-  left.setAttribute("position", userObj.left.pos);
-  left.setAttribute("rotation", userObj.left.rot);
-  right.setAttribute("position", userObj.right.pos);
-  right.setAttribute("rotation", userObj.right.rot);
+  leftHand.setAttribute("position", userObj.left.pos);
+  leftHand.setAttribute("rotation", userObj.left.rot);
+  rightHand.setAttribute("position", userObj.right.pos);
+  rightHand.setAttribute("rotation", userObj.right.rot);
 
   head.setAttribute("id", `a${userObj.id}-head`);
   head.setAttribute("position", userObj.head.pos);
@@ -206,13 +206,14 @@ function getPositionString(coords: any) {
 /**
  * Takes in the AFrame position of the rig and the relative position of sub component, and returns the absolute position of the sub component
  */
-function getAbsolutePosition(rigPos: any, subPos: any) {
-  const rig = { x: rigPos.x, y: rigPos.y, z: rigPos.z };
-  const sub = { x: subPos.x, y: subPos.y, z: subPos.z };
+function getAbsolutePosition(_rigPos: any, subPos: any) {
+  return subPos;
+  // const rig = { x: rigPos.x, y: rigPos.y, z: rigPos.z };
+  // const sub = { x: subPos.x, y: subPos.y, z: subPos.z };
 
-  return {
-    x: rig.x + sub.x,
-    y: rig.y + sub.y,
-    z: rig.z + sub.z,
-  };
+  // return {
+  //   x: rig.x + sub.x,
+  //   y: rig.y + sub.y,
+  //   z: rig.z + sub.z,
+  // };
 }

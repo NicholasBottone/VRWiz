@@ -9,7 +9,7 @@ const tweetInterval = 1000;
 window.setInterval(() => {
   const tweetBall = document.createElement("a-sphere");
   tweetBall.setAttribute("radius", `0.1`);
-  tweetBall.setAttribute("color", `#000000`);
+  tweetBall.setAttribute("color", `#1DA1F2`);
   const numFs = fakeData.filter((x) => x === "f").length;
   const color = (255 * numFs) / 15 + 0.1;
   tweetBall.setAttribute("radius", `${color}`);
