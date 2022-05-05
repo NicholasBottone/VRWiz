@@ -50,8 +50,8 @@ const scene = document.querySelector("a-scene")!;
 
 const maxPopulation2021 = Math.max(...data2021.map((d) => d.population));
 const maxPopulation2020 = Math.max(...data2020.map((d) => d.population));
-const maxGrowth2021 = Math.max(...data2021.map((d) => d.growth));
-const maxGrowth2020 = Math.max(...data2020.map((d) => d.growth));
+// const maxGrowth2021 = Math.max(...data2021.map((d) => d.growth));
+// const maxGrowth2020 = Math.max(...data2020.map((d) => d.growth));
 
 let i = 0;
 i = 0;
