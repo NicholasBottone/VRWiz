@@ -144,23 +144,44 @@ export function removeAvatar(userId: string) {
 export function createMyUserObj(id: string, username: string): User {
   if (!id) throw new Error("no established connection to socket!");
 
+  const rigPosition = document.getElementById("rig")!.getAttribute("position");
+  const rigRotation = document.getElementById("rig")!.getAttribute("rotation");
+
   const leftPosString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("position")!
+    getAbsolutePosition(
+      rigPosition,
+      document.getElementById("left-con")!.getAttribute("position")!
+    )
   );
   const leftRotString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("rotation")!
+    getAbsolutePosition(
+      rigRotation,
+      document.getElementById("left-con")!.getAttribute("rotation")!
+    )
   );
   const rightPosString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("position")!
+    getAbsolutePosition(
+      rigPosition,
+      document.getElementById("right-con")!.getAttribute("position")!
+    )
   );
   const rightRotString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("rotation")!
+    getAbsolutePosition(
+      rigRotation,
+      document.getElementById("right-con")!.getAttribute("rotation")!
+    )
   );
   const headPosString = getPositionString(
-    document.getElementById("camera")!.getAttribute("position")!
+    getAbsolutePosition(
+      rigPosition,
+      document.getElementById("camera")!.getAttribute("position")!
+    )
   );
   const headRotString = getPositionString(
-    document.getElementById("camera")!.getAttribute("rotation")!
+    getAbsolutePosition(
+      rigRotation,
+      document.getElementById("camera")!.getAttribute("rotation")!
+    )
   );
 
   const color = stringToColor(id);
@@ -180,4 +201,18 @@ export function createMyUserObj(id: string, username: string): User {
  */
 function getPositionString(coords: any) {
   return `${coords.x} ${coords.y} ${coords.z}`;
+}
+
+/**
+ * Takes in the AFrame position of the rig and the relative position of sub component, and returns the absolute position of the sub component
+ */
+function getAbsolutePosition(rigPos: any, subPos: any) {
+  const rig = { x: rigPos.x, y: rigPos.y, z: rigPos.z };
+  const sub = { x: subPos.x, y: subPos.y, z: subPos.z };
+
+  return {
+    x: rig.x + sub.x,
+    y: rig.y + sub.y,
+    z: rig.z + sub.z,
+  };
 }

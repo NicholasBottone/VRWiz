@@ -9,7 +9,12 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
-    <a-scene id="first" background="color: blue">
+    <a-scene id="first">
+      <a-assets>
+        <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" alt="sky"></img>
+      </a-assets>
+      <a-sky src="#sky"></a-sky>
+
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <a-cylinder
         position="1 0.75 -3"
