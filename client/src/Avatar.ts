@@ -25,8 +25,8 @@ export function createAvatar(userObj: User, _clientId: string) {
   const scene = document.querySelector("a-scene")!;
 
   scene.appendChild(head);
-  head.appendChild(leftHand);
-  head.appendChild(rightHand);
+  scene.appendChild(leftHand);
+  scene.appendChild(rightHand);
   head.appendChild(leftEye);
   head.appendChild(rightEye);
   leftEye.appendChild(leftPupil);
@@ -148,16 +148,28 @@ export function createMyUserObj(id: string, username: string): User {
   const rigRotation = document.getElementById("rig")!.getAttribute("rotation");
 
   const leftPosString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("position")!
+    getAbsolutePosition(
+      rigPosition,
+      document.getElementById("left-con")!.getAttribute("position")!
+    )
   );
   const leftRotString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("rotation")!
+    getAbsolutePosition(
+      rigRotation,
+      document.getElementById("left-con")!.getAttribute("rotation")!
+    )
   );
   const rightPosString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("position")!
+    getAbsolutePosition(
+      rigPosition,
+      document.getElementById("right-con")!.getAttribute("position")!
+    )
   );
   const rightRotString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("rotation")!
+    getAbsolutePosition(
+      rigRotation,
+      document.getElementById("right-con")!.getAttribute("rotation")!
+    )
   );
   const headPosString = getPositionString(
     getAbsolutePosition(
