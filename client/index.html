@@ -50,10 +50,15 @@
           position="0 1.6 0"
           look-controls="pointerLockEnabled: true"
         ></a-entity>
-        <a-entity id="left-con" oculus-touch-controls="hand: left"></a-entity>
-        <a-entity id="right-con" oculus-touch-controls="hand: right"></a-entity>
-        <a-entity
-          raycaster="showLine: true; far: 100; lineColor: red; lineOpacity: 0.5"
+        <a-entity id="left-con" oculus-touch-controls="hand: left"
+          ><a-entity
+            raycaster="showLine: true; far: 100; lineColor: red; lineOpacity: 0.5"
+          ></a-entity
+        ></a-entity>
+        <a-entity id="right-con" oculus-touch-controls="hand: right"
+          ><a-entity
+            raycaster="showLine: true; far: 100; lineColor: red; lineOpacity: 0.5"
+          ></a-entity
         ></a-entity>
       </a-entity>
     </a-scene>
