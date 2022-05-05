@@ -148,16 +148,24 @@ export function createMyUserObj(id: string, username: string): User {
   const rigRotation = document.getElementById("rig")!.getAttribute("rotation");
 
   const leftPosString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("position")!
+    getControllerPosOffset(
+      document.getElementById("left-con")!.getAttribute("position")!
+    )
   );
   const leftRotString = getPositionString(
-    document.getElementById("left-con")!.getAttribute("rotation")!
+    getControllerRotOffset(
+      document.getElementById("left-con")!.getAttribute("rotation")!
+    )
   );
   const rightPosString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("position")!
+    getControllerPosOffset(
+      document.getElementById("right-con")!.getAttribute("position")!
+    )
   );
   const rightRotString = getPositionString(
-    document.getElementById("right-con")!.getAttribute("rotation")!
+    getControllerRotOffset(
+      document.getElementById("right-con")!.getAttribute("rotation")!
+    )
   );
   const headPosString = getPositionString(
     getAbsolutePosition(
@@ -202,5 +210,21 @@ function getAbsolutePosition(rigPos: any, subPos: any) {
     x: rig.x + sub.x,
     y: rig.y + sub.y,
     z: rig.z + sub.z,
+  };
+}
+
+function getControllerPosOffset(controllerPos: any) {
+  return {
+    x: controllerPos.x,
+    y: controllerPos.y - 1.6,
+    z: controllerPos.z - 1,
+  };
+}
+
+function getControllerRotOffset(controllerRot: any) {
+  return {
+    x: controllerRot.x,
+    y: controllerRot.y - 90,
+    z: controllerRot.z,
   };
 }
