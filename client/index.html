@@ -12,8 +12,21 @@
     <a-scene id="first">
       <a-assets>
         <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" alt="sky" />
+        <img
+          id="pop-growth"
+          src="https://i.imgur.com/My0ZSwA.png"
+          alt="where counties are growing"
+        />
       </a-assets>
+
       <a-sky src="#sky"></a-sky>
+      <a-plane
+        height="100"
+        width="100"
+        rotation="-90 0 0"
+        position="0 0 20"
+        src="#pop-growth"
+      ></a-plane>
 
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <a-cylinder
