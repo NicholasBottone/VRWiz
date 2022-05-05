@@ -15,23 +15,23 @@ export function createAvatar(userObj: User, _clientId: string) {
   const left = document.createElement("a-cone");
   const right = document.createElement("a-cone");
 
-  const head = document.createElement("a-entity");
-  const face = document.createElement("a-sphere");
+  const head = document.createElement("a-sphere");
   const leftEye = document.createElement("a-sphere");
   const rightEye = document.createElement("a-sphere");
   const leftPupil = document.createElement("a-sphere");
   const rightPupil = document.createElement("a-sphere");
+  const nametag = document.createElement("a-entity");
 
   const scene = document.querySelector("a-scene")!;
 
   scene.appendChild(left);
   scene.appendChild(right);
   scene.appendChild(head);
-  head.appendChild(face);
   head.appendChild(leftEye);
   head.appendChild(rightEye);
-  head.appendChild(leftPupil);
-  head.appendChild(rightPupil);
+  leftEye.appendChild(leftPupil);
+  rightEye.appendChild(rightPupil);
+  head.appendChild(nametag);
 
   function setControllerProps(controller: HTMLElement) {
     controller.setAttribute(
@@ -58,30 +58,37 @@ export function createAvatar(userObj: User, _clientId: string) {
   head.setAttribute("position", userObj.head.pos);
   head.setAttribute("rotation", userObj.head.rot);
 
-  face.setAttribute("id", `a${userObj.id}-face`);
-  face.setAttribute("position", "0 0 0");
-  face.setAttribute("radius", "0.5");
-  face.setAttribute("color", userObj.color);
+  head.setAttribute("id", `a${userObj.id}-face`);
+  head.setAttribute("scale", "0.45 0.5 0.37");
+  head.setAttribute("color", userObj.color);
 
   leftEye.setAttribute("id", `a${userObj.id}-left-eye`);
-  leftEye.setAttribute("position", "0.1 0.1 0");
-  leftEye.setAttribute("radius", "0.1");
-  leftEye.setAttribute("color", "white");
+  leftEye.setAttribute("position", "0.26 0.15 -1.0");
+  leftEye.setAttribute("scale", "0.16 0.16 0.16");
+  leftEye.setAttribute("color", "#efefef");
 
   rightEye.setAttribute("id", `a${userObj.id}-right-eye`);
-  rightEye.setAttribute("position", "-0.1 0.1 0");
-  rightEye.setAttribute("radius", "0.1");
-  rightEye.setAttribute("color", "white");
+  rightEye.setAttribute("position", "-0.26 0.15 -1.0");
+  rightEye.setAttribute("scale", "0.16 0.16 0.16");
+  rightEye.setAttribute("color", "#efefef");
 
   leftPupil.setAttribute("id", `a${userObj.id}-left-pupil`);
-  leftPupil.setAttribute("position", "0.1 0.1 0");
-  leftPupil.setAttribute("radius", "0.05");
+  leftPupil.setAttribute("position", "0 0 -1");
+  leftPupil.setAttribute("scale", "0.2 0.2 0.2");
   leftPupil.setAttribute("color", "black");
 
   rightPupil.setAttribute("id", `a${userObj.id}-right-pupil`);
-  rightPupil.setAttribute("position", "-0.1 0.1 0");
-  rightPupil.setAttribute("radius", "0.05");
+  rightPupil.setAttribute("position", "0 0 -1");
+  rightPupil.setAttribute("scale", "0.2 0.2 0.2");
   rightPupil.setAttribute("color", "black");
+
+  nametag.setAttribute("id", `a${userObj.id}-nametag`);
+  nametag.setAttribute("position", "0 1.3 0");
+  nametag.setAttribute("rotation", "0 180 0");
+  nametag.setAttribute(
+    "text",
+    `value: ${userObj.username}; align: center; color: black; width: 4; wrapCount: 20;`
+  );
 }
 
 /**
