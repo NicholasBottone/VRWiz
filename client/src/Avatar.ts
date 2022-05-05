@@ -85,7 +85,7 @@ export function createAvatar(userObj: User, _clientId: string) {
   nametag.setAttribute("rotation", "0 180 0");
   nametag.setAttribute(
     "text",
-    `value: ${userObj.username}; align: center; color: black; width: 4; wrapCount: 20;`
+    `value: ${userObj.username}; align: center; color: white; width: 4; wrapCount: 20;`
   );
 }
 
