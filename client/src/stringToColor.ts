@@ -24,6 +24,6 @@ export default function stringToColor(str: string): string {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
     hash = hash & hash;
   }
-  hash = ((hash % colors.length) + colors.length) % colors.length;
+  hash = hash % colors.length;
   return colors[hash];
 }
